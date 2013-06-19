@@ -39,6 +39,9 @@
   
 
   <modules>
+    <!-- new Joran configurator -->
+    <module>logback-joran2</module>
+    <!-- core modules -->
     <module>logback-core</module>
     <module>logback-classic</module>
     <module>logback-access</module>
@@ -222,6 +225,20 @@
         <version>2.0</version>
       </extension>
     </extensions>
+
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.codehaus.modello</groupId>
+          <artifactId>modello-maven-plugin</artifactId>
+          <version>1.8-SNAPSHOT</version>
+          <configuration>
+            <version>2.0.0</version>
+            <useJava5>true</useJava5>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
 
     <plugins>
 
