@@ -1,9 +1,19 @@
 package ch.qos.logback.core.joran.v2;
 
+import static org.junit.Assert.assertTrue;
+
+import static org.unitils.reflectionassert.ReflectionAssert.assertReflectionEquals;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+
+import org.apache.commons.io.FileUtils;
+import org.custommonkey.xmlunit.Diff;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import ch.qos.logback.core.joran.v2.io.stax.JoranStaxReader;
 import ch.qos.logback.core.joran.v2.io.stax.JoranStaxWriter;
 
 public final class ConfigurationTestCase
@@ -50,10 +60,25 @@ public final class ConfigurationTestCase
     }
 
     @Test
+    public final void read()
+        throws Exception
+    {
+        Configuration actual = new JoranStaxReader().read( getClass().getResourceAsStream( "logback.xml" ) );
+        assertReflectionEquals( expected, actual );
+    }
+
+    @Test
     public final void write()
         throws Exception
     {
-        new JoranStaxWriter().write( System.out, expected );
+        String expectedDocument = FileUtils.readFileToString( new File( System.getProperty( "user.dir" ), "src/test/resources/ch/qos/logback/core/joran/v2/logback.xml" ) );
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        new JoranStaxWriter().write( baos, expected );
+        String actualDocument = new String(baos.toByteArray());
+
+        Diff diff = new Diff( expectedDocument, actualDocument );
+        assertTrue( "Joran write didn't work as expected " + diff, diff.identical() );
     }
 
 }
