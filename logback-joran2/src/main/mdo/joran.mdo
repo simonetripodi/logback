@@ -33,7 +33,7 @@
   </defaults>
 
   <classes>
-    <class xml.tagName="configuration" rootElement="true" java.builder="true" java.toString="true">
+    <class xml.tagName="configuration" xsd.compositor="sequence" rootElement="true" java.builder="true" java.toString="true">
       <name>Configuration</name>
       <version>2.0.0+</version>
       <fields>
@@ -63,7 +63,7 @@
           <name>properties</name>
           <version>2.0.0+</version>
           <type>List</type>
-          <association xml.itemsStyle="inline" java.init="constructor">
+          <association xml.itemsStyle="flat" java.init="constructor">
             <type>Property</type>
             <multiplicity>*</multiplicity>
           </association>
@@ -73,7 +73,7 @@
           <name>appenders</name>
           <version>2.0.0+</version>
           <required>true</required>
-          <association xml.itemsStyle="inline" java.init="constructor">
+          <association xml.itemsStyle="flat" java.init="constructor">
             <type>Appender</type>
             <multiplicity>*</multiplicity>
           </association>

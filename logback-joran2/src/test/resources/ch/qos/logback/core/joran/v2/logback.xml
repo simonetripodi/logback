@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="30 seconds">
-  <properties>
-    <property name="USER_HOME" value="/home/sebastien" />
-    <property name="nodeId" value="firstNode" scope="context" />
-    <property file="src/main/java/chapters/configuration/variables1.properties" />
-    <property resource="resource1.properties" />
-  </properties>
-  <appenders>
-    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-      <file>${USER_HOME}/${nodeId}/myApp.log</file>
-      <encoder>
-        <pattern>%msg%n</pattern>
-      </encoder>
-    </appender>
-  </appenders>
+  <property name="USER_HOME" value="/home/sebastien" />
+  <property name="nodeId" value="firstNode" scope="context" />
+  <property file="src/main/java/chapters/configuration/variables1.properties" />
+  <property resource="resource1.properties" />
+  <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+    <file>${USER_HOME}/${nodeId}/myApp.log</file>
+    <encoder>
+      <pattern>%msg%n</pattern>
+    </encoder>
+  </appender>
   <root level="info">
     <appender-ref ref="FILE" />
   </root>
